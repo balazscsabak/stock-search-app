@@ -1,4 +1,6 @@
+import { Providers } from '@/lib/providers'
 import type { Metadata } from 'next'
+import MainNavBar from './(common)/components/navigation/main-nav-bar'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -13,7 +15,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="dark">{children}</body>
+      <body className="dark">
+        <Providers>
+          <MainNavBar />
+          {children}
+        </Providers>
+      </body>
     </html>
   )
 }

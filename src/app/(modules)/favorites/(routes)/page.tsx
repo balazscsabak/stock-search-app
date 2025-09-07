@@ -1,4 +1,4 @@
-import { FavoritesList } from '@/app/(modules)/stocks/components/favorites-list'
+import { FavoritesList } from '@/app/(modules)/favorites/components/favorites-list'
 
 export default function FavoritesPage() {
   return (

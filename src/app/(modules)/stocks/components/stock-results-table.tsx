@@ -10,8 +10,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/app/(common)/components/ui/table'
+import { FavoriteButton } from '@/app/(modules)/favorites/components/favorite-button'
 import { Stock } from '@/types/stock'
-import { FavoriteButton } from '../../../(common)/components/favorite-button'
 
 interface StockResultsTableProps {
   stocks: Stock[]

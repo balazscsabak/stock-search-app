@@ -26,7 +26,7 @@ const MainNavBar = () => {
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <Link href="/favorites">Favorites</Link>
+            <Link href="/stocks/favorites">Favorites</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>

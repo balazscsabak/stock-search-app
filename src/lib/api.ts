@@ -1,9 +1,14 @@
 'use server'
 
 import { apiClient } from '@/lib/axios'
+import { stockSearchMockData } from '@/mock/data'
 
 // Search stocks using SYMBOL_SEARCH
-export const searchStocks = async (query: string) => {
+export const searchStocks = async (query: string, mock: boolean) => {
+  if (mock) {
+    return stockSearchMockData
+  }
+
   const response = await apiClient.get(`/query`, {
     params: {
       function: 'SYMBOL_SEARCH',

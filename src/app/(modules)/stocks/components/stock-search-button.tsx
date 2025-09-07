@@ -1,18 +1,22 @@
 'use client'
 
+import { Alert, AlertTitle } from '@/app/(common)/components/ui/alert'
 import { Stock } from '@/types/stock'
+import { AlertTriangle } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useSearchStock } from '../hooks/use-search-stock'
-import { StockSearchCombobox } from './stock-search-combobox'
+import { StockResultsTable } from './stock-results-table'
+import { StockSearchInput } from './stock-search-input'
 
 export function StockSearchButton() {
-  const [open, setOpen] = useState(false)
-  const [value, setValue] = useState('')
+  const [searchQuery, setSearchQuery] = useState('')
   const router = useRouter()
+  const [useMock, setUseMock] = useState(true)
 
   const { data, isLoading, error } = useSearchStock({
-    query: value,
+    query: searchQuery,
+    mock: useMock,
   })
 
   // Transform the API response to our Stock interface
@@ -30,20 +34,39 @@ export function StockSearchButton() {
     })) || []
 
   const handleSelect = (stock: Stock) => {
-    setOpen(false)
     router.push(`/stocks/${stock.symbol}`)
   }
 
+  // Check if API credit warning should be shown
+  const showApiWarning = data?.Information && !data?.bestMatches
+
   return (
-    <StockSearchCombobox
-      open={open}
-      onOpenChange={setOpen}
-      value={value}
-      setValue={setValue}
-      stocks={stocks}
-      isLoading={isLoading}
-      error={error}
-      onStockSelect={handleSelect}
-    />
+    <div className="space-y-6 py-8">
+      {showApiWarning && (
+        <Alert variant="destructive" className="max-w-lg">
+          <AlertTriangle className="h-4 w-4" />
+          <AlertTitle>
+            API Credit Limit Reached - Standard API rate limit is 25 requests
+            per day
+          </AlertTitle>
+        </Alert>
+      )}
+
+      <StockSearchInput
+        onSearchChange={setSearchQuery}
+        placeholder="Search for stocks by symbol or company name..."
+        label="Stock Search"
+      />
+
+      {searchQuery && (
+        <StockResultsTable
+          stocks={stocks}
+          isLoading={isLoading}
+          error={error}
+          onStockSelect={handleSelect}
+          searchQuery={searchQuery}
+        />
+      )}
+    </div>
   )
 }

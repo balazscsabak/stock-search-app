@@ -2,7 +2,7 @@ import { FavoritesList } from '@/app/(modules)/favorites/components/favorites-li
 
 export default function FavoritesPage() {
   return (
-    <div className="container mx-auto py-8">
+    <div className="container mx-auto px-2 py-8">
       <FavoritesList />
     </div>
   )

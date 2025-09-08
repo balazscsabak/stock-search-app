@@ -22,18 +22,30 @@ export function StockSearchButton() {
   })
 
   // Transform the API response to our Stock interface
-  let stocks: Stock[] =
-    data?.bestMatches?.map((match: any) => ({
-      symbol: match['1. symbol'],
-      name: match['2. name'],
-      type: match['3. type'],
-      region: match['4. region'],
-      marketOpen: match['5. marketOpen'],
-      marketClose: match['6. marketClose'],
-      timezone: match['7. timezone'],
-      currency: match['8. currency'],
-      matchScore: match['9. matchScore'],
-    })) || []
+  const stocks: Stock[] =
+    data?.bestMatches?.map(
+      (match: {
+        '1. symbol': string
+        '2. name': string
+        '3. type': string
+        '4. region': string
+        '5. marketOpen': string
+        '6. marketClose': string
+        '7. timezone': string
+        '8. currency': string
+        '9. matchScore': string
+      }) => ({
+        symbol: match['1. symbol'],
+        name: match['2. name'],
+        type: match['3. type'],
+        region: match['4. region'],
+        marketOpen: match['5. marketOpen'],
+        marketClose: match['6. marketClose'],
+        timezone: match['7. timezone'],
+        currency: match['8. currency'],
+        matchScore: match['9. matchScore'],
+      }),
+    ) || []
 
   const handleSelect = (stock: Stock) => {
     router.push(`/stocks/${stock.symbol}`)

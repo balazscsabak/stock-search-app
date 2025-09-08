@@ -41,7 +41,7 @@ export function CompanyOverview({
 
         <Separator />
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {sector && (
             <div>
               <h4 className="mb-2 font-semibold">Sector</h4>

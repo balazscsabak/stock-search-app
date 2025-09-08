@@ -26,10 +26,10 @@ export function PriceOverview({
   return (
     <Card>
       <CardContent className="pt-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="text-3xl font-bold">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex-1">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-2">
+              <span className="text-2xl font-bold sm:text-3xl">
                 ${parseFloat(currentPrice).toFixed(2)}
               </span>
               <div
@@ -43,18 +43,22 @@ export function PriceOverview({
                 ) : (
                   <TrendingDown className="h-4 w-4" />
                 )}
-                <span className="font-medium">
+                <span className="text-sm font-medium sm:text-base">
                   {change} ({changePercent})
                 </span>
               </div>
             </div>
-            <p className="text-muted-foreground mt-1 text-sm">
+            <p className="text-muted-foreground mt-1 text-xs sm:text-sm">
               {latestTradingDay}
             </p>
           </div>
-          <div className="text-right">
-            <p className="text-muted-foreground text-sm">Market Cap</p>
-            <p className="text-lg font-semibold">{marketCap || 'N/A'}</p>
+          <div className="text-left sm:text-right">
+            <p className="text-muted-foreground text-xs sm:text-sm">
+              Market Cap
+            </p>
+            <p className="text-base font-semibold sm:text-lg">
+              {marketCap || 'N/A'}
+            </p>
           </div>
         </div>
       </CardContent>

@@ -101,9 +101,11 @@ export function StockDetailsPage({ symbol }: StockDetailsPageProps) {
   const changePercent = quoteData?.['10. change percent']
 
   return (
-    <div className="container mx-auto space-y-6 py-8">
-      <div className="flex justify-end">
-        <MockToggle isMock={isMock} onToggle={setIsMock} />
+    <div className="container mx-auto space-y-4 px-4 py-4 sm:space-y-6 sm:px-6 sm:py-8">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="order-2 sm:order-1">
+          <MockToggle isMock={isMock} onToggle={setIsMock} />
+        </div>
       </div>
 
       <StockHeader
@@ -115,9 +117,9 @@ export function StockDetailsPage({ symbol }: StockDetailsPageProps) {
       />
 
       {showApiWarning && (
-        <Alert variant="destructive" className="mx-auto max-w-lg">
+        <Alert variant="destructive" className="mx-auto max-w-full sm:max-w-lg">
           <AlertTriangle className="h-4 w-4" />
-          <AlertTitle>
+          <AlertTitle className="text-sm sm:text-base">
             API Credit Limit Reached - Standard API rate limit is 25 requests
             per day
           </AlertTitle>
@@ -132,28 +134,34 @@ export function StockDetailsPage({ symbol }: StockDetailsPageProps) {
         marketCap={overview.MarketCapitalization}
       />
 
-      <StockCharts timeSeriesData={timeSeries?.['Time Series (Daily)']} />
-
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        <CompanyOverview
-          description={overview.Description}
-          sector={overview.Sector}
-          industry={overview.Industry}
-          country={overview.Country}
-          currency={overview.Currency}
-        />
-
-        <KeyMetrics
-          peRatio={overview.PERatio}
-          eps={overview.EPS}
-          dividendYield={overview.DividendYield}
-          week52High={overview['52WeekHigh']}
-          week52Low={overview['52WeekLow']}
-          beta={overview.Beta}
-        />
+      <div className="w-full">
+        <StockCharts timeSeriesData={timeSeries?.['Time Series (Daily)']} />
       </div>
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-3">
+        <div className="lg:col-span-2">
+          <CompanyOverview
+            description={overview.Description}
+            sector={overview.Sector}
+            industry={overview.Industry}
+            country={overview.Country}
+            currency={overview.Currency}
+          />
+        </div>
+
+        <div className="lg:col-span-1">
+          <KeyMetrics
+            peRatio={overview.PERatio}
+            eps={overview.EPS}
+            dividendYield={overview.DividendYield}
+            week52High={overview['52WeekHigh']}
+            week52Low={overview['52WeekLow']}
+            beta={overview.Beta}
+          />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
         <FinancialHighlights
           revenueTTM={overview.RevenueTTM}
           profitMargin={overview.ProfitMargin}
@@ -175,24 +183,40 @@ export function StockDetailsPage({ symbol }: StockDetailsPageProps) {
 
 function StockDetailsSkeleton() {
   return (
-    <div className="container mx-auto space-y-6 py-8">
+    <div className="container mx-auto space-y-4 px-4 py-4 sm:space-y-6 sm:px-6 sm:py-8">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="order-2 sm:order-1">
+          <Skeleton className="h-16 w-32" />
+        </div>
+      </div>
+
       <div className="flex items-center gap-4">
         <Skeleton className="h-10 w-10" />
-        <div>
-          <Skeleton className="mb-2 h-8 w-64" />
+        <div className="flex-1">
+          <Skeleton className="mb-2 h-8 w-full max-w-64" />
           <Skeleton className="h-6 w-32" />
         </div>
       </div>
 
       <Skeleton className="h-32 w-full" />
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <Skeleton className="h-64 w-full" />
+        <Skeleton className="h-64 w-full" />
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-3">
         <div className="space-y-4 lg:col-span-2">
           <Skeleton className="h-64 w-full" />
         </div>
         <div className="space-y-4">
           <Skeleton className="h-64 w-full" />
         </div>
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
+        <Skeleton className="h-48 w-full" />
+        <Skeleton className="h-48 w-full" />
       </div>
     </div>
   )

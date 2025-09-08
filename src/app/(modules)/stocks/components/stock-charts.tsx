@@ -22,7 +22,16 @@ import {
 } from 'recharts'
 
 interface StockChartsProps {
-  timeSeriesData?: Record<string, any>
+  timeSeriesData?: Record<
+    string,
+    {
+      '1. open': string
+      '2. high': string
+      '3. low': string
+      '4. close': string
+      '5. volume': string
+    }
+  >
 }
 
 export function StockCharts({ timeSeriesData }: StockChartsProps) {
@@ -83,9 +92,7 @@ export function StockCharts({ timeSeriesData }: StockChartsProps) {
                 content={
                   <ChartTooltipContent
                     labelFormatter={(value) => `Date: ${value}`}
-                    formatter={(value, name) => [
-                      `$${Number(value).toFixed(2)}`,
-                    ]}
+                    formatter={(value) => [`$${Number(value).toFixed(2)}`]}
                   />
                 }
               />
@@ -129,9 +136,7 @@ export function StockCharts({ timeSeriesData }: StockChartsProps) {
                 content={
                   <ChartTooltipContent
                     labelFormatter={(value) => `Date: ${value}`}
-                    formatter={(value, name) => [
-                      `${Number(value).toLocaleString()}`,
-                    ]}
+                    formatter={(value) => [`${Number(value).toLocaleString()}`]}
                   />
                 }
               />

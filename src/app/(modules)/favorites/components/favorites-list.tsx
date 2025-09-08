@@ -29,11 +29,11 @@ export function FavoritesList() {
 
   return (
     <div className="space-y-4">
-      <div className="mt-[10vh] flex items-center gap-4">
-        <Heart className="text-muted-foreground mb-4 h-12 w-12" />
-        <h2 className="text-xl font-semibold">
+      <div className="text-center">
+        <h1 className="mb-2 text-2xl font-bold md:text-4xl">
           Favorite Stocks ({favorites.length})
-        </h2>
+        </h1>
+        <Heart className="text-muted-foreground mx-auto mt-4 mb-16 h-10 w-10" />
       </div>
 
       <div className="rounded-md border">

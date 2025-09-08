@@ -1,6 +1,8 @@
 'use client'
 
 import { Alert, AlertTitle } from '@/app/(common)/components/ui/alert'
+import { Label } from '@/app/(common)/components/ui/label'
+import { Switch } from '@/app/(common)/components/ui/switch'
 import { Stock } from '@/types/stock'
 import { AlertTriangle } from 'lucide-react'
 import { useRouter } from 'next/navigation'
@@ -42,8 +44,19 @@ export function StockSearchButton() {
 
   return (
     <div className="space-y-6 py-8">
+      <div className="flex items-center justify-center space-x-2">
+        <Label htmlFor="mock-data-switch" className="text-sm font-medium">
+          Use Mock Data
+        </Label>
+        <Switch
+          id="mock-data-switch"
+          checked={useMock}
+          onCheckedChange={setUseMock}
+        />
+      </div>
+
       {showApiWarning && (
-        <Alert variant="destructive" className="max-w-lg">
+        <Alert variant="destructive" className="mx-auto max-w-lg">
           <AlertTriangle className="h-4 w-4" />
           <AlertTitle>
             API Credit Limit Reached - Standard API rate limit is 25 requests
@@ -55,7 +68,6 @@ export function StockSearchButton() {
       <StockSearchInput
         onSearchChange={setSearchQuery}
         placeholder="Search for stocks by symbol or company name..."
-        label="Stock Search"
       />
 
       {searchQuery && (

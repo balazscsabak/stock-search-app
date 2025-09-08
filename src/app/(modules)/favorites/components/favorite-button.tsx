@@ -19,9 +19,10 @@ export function FavoriteButton({
   variant = 'ghost',
   className,
 }: FavoriteButtonProps) {
-  const { isFavorite, toggleFavorite } = useFavoritesStore()
+  const favorites = useFavoritesStore((state) => state.favorites)
+  const toggleFavorite = useFavoritesStore((state) => state.toggleFavorite)
 
-  const isFavorited = isFavorite(stock.symbol)
+  const isFavorited = favorites.some((fav) => fav.symbol === stock.symbol)
 
   const handleToggle = (e: React.MouseEvent) => {
     e.stopPropagation()

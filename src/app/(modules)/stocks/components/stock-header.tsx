@@ -1,0 +1,56 @@
+'use client'
+
+import { Button } from '@/app/(common)/components/ui/button'
+import { FavoriteButton } from '@/app/(modules)/favorites/components/favorite-button'
+import { ArrowLeft } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+
+interface StockHeaderProps {
+  name: string
+  symbol: string
+  assetType?: string
+  country?: string
+  currency?: string
+}
+
+export function StockHeader({
+  name,
+  symbol,
+  assetType,
+  country,
+  currency,
+}: StockHeaderProps) {
+  const router = useRouter()
+
+  return (
+    <div className="flex items-center justify-between">
+      <div className="flex items-center gap-4">
+        <Button variant="ghost" size="icon" onClick={() => router.back()}>
+          <ArrowLeft className="h-4 w-4" />
+        </Button>
+        <div>
+          <h1 className="text-3xl font-bold">{name}</h1>
+          <p className="text-muted-foreground text-lg">{symbol}</p>
+        </div>
+      </div>
+      <div className="flex items-center gap-4">
+        {(assetType || country || currency) && (
+          <FavoriteButton
+            stock={{
+              symbol,
+              name,
+              type: assetType || '',
+              region: country || '',
+              currency: currency || '',
+              marketOpen: '09:30',
+              marketClose: '16:00',
+              timezone: 'UTC-5',
+              matchScore: '1.0000',
+            }}
+            size="lg"
+          />
+        )}
+      </div>
+    </div>
+  )
+}

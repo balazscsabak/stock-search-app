@@ -4,6 +4,10 @@
 
 https://stock-search-app-three.vercel.app/
 
+### Mock Data Feature
+
+Due to Alpha Vantage API rate limits (25 requests per day for free tier), the application includes a **Mock Data Toggle** feature that allows users to switch between live API data and sample data for development and testing purposes.
+
 ### Objective
 
 Your task is to create a simple Next.js application that allows users to search for stock quotes
@@ -14,7 +18,7 @@ selected stock, including its name, symbol, current price, and any other relevan
 obtain from the https://www.alphavantage.co/. Additionally, the search view should include a
 stock suggestion feature that displays a list of suggested stocks as the user types.
 
-### Requirements
+#### Requirements
 
 - The application should be built using Next.js and styled using CSS or TailwindCSS.
 - https://www.alphavantage.co/ should be used to obtain the data for the stocks.
@@ -30,7 +34,7 @@ stock suggestion feature that displays a list of suggested stocks as the user ty
 - The code should be hosted on a public Git repository, such as GitHub. Try to maintain a clear and
   concise commit history.
 
-### Bonus Points
+#### Bonus Points
 
 - NextJS SSR.
 - The search view should include a stock suggestion feature that displays a list of suggested stocks
